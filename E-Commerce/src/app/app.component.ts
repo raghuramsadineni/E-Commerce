@@ -17,8 +17,8 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this.login.username.subscribe(data =>{
       this.username=data;
-      this.appPages[2].title=this.username;
-      this.appPages[2].children=this.get();
+      this.appPages[3].title=this.username;
+      this.appPages[3].children=this.get();
     });
     
   }
@@ -26,11 +26,16 @@ export class AppComponent implements OnInit{
     {
       title: 'Home',
       url: '/home',
-      icon: 'home'
+      icon: 'ios-leaf'
     },
     {
-      title: 'List',
-      url: '/list',
+      title: 'Cart',
+      url: '/home',
+      icon: 'md-cart'
+    },
+    {
+      title: 'Categories',
+      
       icon: 'list'
     },
     {

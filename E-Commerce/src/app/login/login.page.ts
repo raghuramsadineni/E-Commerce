@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import {Router} from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {LoginService} from '../services/login.service';
+import {User} from '../models/users';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -11,10 +11,9 @@ import {LoginService} from '../services/login.service';
 export class LoginPage implements OnInit {
   loginForm:FormGroup;
   items:any=[];
+  user:User;
   constructor(
-    private storage:Storage,
     private formBuilder:FormBuilder,
-    private router:Router,
     private login:LoginService) { }
 
   ngOnInit() {
@@ -24,21 +23,11 @@ export class LoginPage implements OnInit {
     });
   }
   signin(loginForm:FormGroup){
-    this.items.push(JSON.stringify(loginForm.value));
-    this.storage.set('login',this.items);
-    console.log('Success');
+    this.user=loginForm.value;
+    this.login.signin(this.user);
   }
   signup(loginForm:FormGroup){
-    this.storage.get('login').then((val)=>{
-      for(let i in val){
-        if(JSON.parse(val[i]).username == loginForm.value.username){
-          if(JSON.parse(val[i]).password == loginForm.value.password)
-          {
-            this.login.set(JSON.parse(val[i]).username);
-            this.router.navigate(['/home']);
-          }
-        }
-      }
-    });
+    this.user=this.loginForm.value;
+    this.login.signup(this.user);
   }
 }
