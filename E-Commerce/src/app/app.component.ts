@@ -30,7 +30,7 @@ export class AppComponent implements OnInit{
     },
     {
       title: 'Cart',
-      url: '/home',
+      url: '/cart',
       icon: 'md-cart'
     },
     {
@@ -72,9 +72,18 @@ export class AppComponent implements OnInit{
     }
     return [
       {
+        title:'My Orders'
+      },
+      {
+        title:'Manage Orders'
+      },
+      {
         title:'Manage Products',
         url:'/manageproducts'
       },
+      {
+        title:'Logout'
+      }
     ]
   }
 }

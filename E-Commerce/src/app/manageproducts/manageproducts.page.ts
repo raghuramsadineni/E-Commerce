@@ -11,7 +11,6 @@ export class ManageproductsPage implements OnInit {
 
   ngOnInit() {
     this.p=products;
-    console.log(this.p);
   }
 
 }

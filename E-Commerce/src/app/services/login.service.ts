@@ -21,7 +21,6 @@ export class LoginService {
   signin(user:User){
     this.items.push(user);
     this.storage.set('login',this.items);
-    console.log('Success');
   }
   signup(user:User){
     this.storage.get('login').then((val)=>{
