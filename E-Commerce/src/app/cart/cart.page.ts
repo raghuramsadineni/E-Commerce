@@ -9,11 +9,17 @@ import { CartService } from '../services/cart.service';
 })
 export class CartPage implements OnInit {
   p:Product[];
+  total:number;
   constructor(private cart:CartService) { }
 
   ngOnInit() {
     this.p=this.cart.getCartItems();
-    console.log(this.p);
+    this.total=this.cart.getTotal();
   }
-
+  add(id:number){
+    this.cart.addToCart(id);
+  }
+  subtract(id:number){
+    this.cart.subtractFromCart(id);
+  }
 }

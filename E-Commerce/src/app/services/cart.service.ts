@@ -5,19 +5,26 @@ import {products, Product} from '../models/products';
   providedIn: 'root'
 })
 export class CartService {
-  cart:Product[];
-  
+  cart:Product[]=[];
+  total:number=0;
   constructor() { }
 
   addToCart(id:number){
     products[id-1].quantity+=1;
   }
   subtractFromCart(id:number){
-    products[id-1].quantity-=1
+    products[id-1].quantity-=1;
   }
   getCartItems(){
-    return products.filter(res=>{
-      res.quantity!=0;
-    })
+    for(let i in products){
+      if(products[i].quantity!=0){
+        this.cart.push(products[i]);
+        this.total+=products[i].quantity*products[i].price;
+      }
+    }
+    return this.cart
+  }
+  getTotal():number{
+    return this.total;
   }
 }
