@@ -1,52 +1,29 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { LoginService } from './services/login.service';
-import {Router} from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit{
-  username:string="Profile";
-  ngOnInit(){
-    this.login.username.subscribe(data =>{
-      this.username=data;
-      this.appPages[3].title=this.username;
-      this.appPages[3].children=this.get();
-    });
-    
-  }
+export class AppComponent {
   public appPages = [
     {
       title: 'Home',
       url: '/home',
-      icon: 'ios-leaf'
+      icon: 'home'
     },
     {
-      title: 'Cart',
-      url: '/cart',
-      icon: 'md-cart'
-    },
-    {
-      title: 'Categories',
-      
+      title: 'List',
+      url: '/list',
       icon: 'list'
-    },
-    {
-      title:this.username,
-      children: this.get()
     }
   ];
 
   constructor(
-    private router:Router,
-    private login:LoginService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
@@ -60,31 +37,4 @@ export class AppComponent implements OnInit{
       this.splashScreen.hide();
     });
   }
-  get():any{
-    if(this.username=="Profile")
-    {
-      return [
-        {
-          title:'Login',
-          url:'/login'
-        }
-      ]
-    }
-    return [
-      {
-        title:'My Orders'
-      },
-      {
-        title:'Manage Orders'
-      },
-      {
-        title:'Manage Products',
-        url:'/manageproducts'
-      },
-      {
-        title:'Logout'
-      }
-    ]
-  }
 }
-
